@@ -19,13 +19,17 @@ var express   = require('express'),
   password: 'root',
   database: 'sowapp'
 },
- qb = require('node-querybuilder').QueryBuilder(mysql_settings,'mysql');
+ qb = require('node-querybuilder').QueryBuilder(mysql_settings, 'mysql');
 
  router.post('/test', function(req, res){
-   console.log(bcrypt);
+   qb.select('unicode')
+       .where({ "unicode": req.body.password})
+       .get('student', function(err, result) {
+         console.log(result);
+         if(err){console.log("db exception");res.json("db error")}
+          else{res.json(result)}
+       });
 
-console.log("hash", hash);
-res.send("hello");
  });
 router.post('/register', function(req, res) {
    var hash = bcrypt.hashSync(req.body.dob+req.body.mobile);
@@ -60,15 +64,26 @@ qb.insert('student', data, function(err, result){
                  text: 'Hello world ?',
                  attachments: [{
                         filename: 'test.png',
-                         content:svg_string}]
+                         content: svg_string}]
              };
              transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
         return console.log(error);
-       }
+          }
               console.log('Message %s sent: %s', info.messageId, info.response);
         });
-
 });
+router.post('/login', function(req, res) {
+  console.log("login api");
+  qb.select('unicode')
+     .where({"unicode":req.body.password})
+      .get('student', function(err, result) {
+    console.log(err);
+    if(err || result.length === 0){ res.json("invalid credentials");}
+      else{ res.json("success");}
+  });
+});
+
+
 
 module.exports = router;
