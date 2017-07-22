@@ -9,13 +9,22 @@
   "dependencies": {
     "bcrypt": "^1.0.2",
     "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.17.2",
     "debug": "~2.6.3",
     "express": "~4.15.2",
+    "express-fileupload": "^0.1.3",
+    "express-validation": "^1.0.2",
+    "fi-fileman": "^2.2.1",
+    "html": "^1.0.0",
+    "joi": "^10.6.0",
+    "morgan": "^1.8.2",
     "multer": "^1.3.0",
     "mysql": "^2.13.0",
     "node-querybuilder": "^0.15.0",
     "nodemailer": "^4.0.1",
     "nodemon": "*",
-    "qr-image": "^3.2.0"
+    "path": "^0.12.7",
+    "qr-image": "^3.2.0",
+    "validator": "^7.1.0"
   }
 }
