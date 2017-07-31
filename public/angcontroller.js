@@ -6,7 +6,6 @@ angular.module('angcontroller',['angservice'])
     if(data.status == 200){
     $scope.data_to_view = data.data;
     console.log(data.data);
-  }
-
+   }
   });
 });

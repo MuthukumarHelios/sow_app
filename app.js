@@ -10,7 +10,7 @@ app.use(morgan('dev'));
 app.set('view engine', 'html');
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('*', function(req, res){
+app.get("*",function(req, res){
   // res.json("hey")
   res.sendFile(path.join(__dirname + "/views/muthu.html"));
 });

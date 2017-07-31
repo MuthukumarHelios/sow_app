@@ -22,15 +22,29 @@ var express   =  require('express'),
   database: 'sowapp'
 },
 qb = require('node-querybuilder').QueryBuilder(mysql_settings, 'mysql');
-
+var parseXlsx = require('excel');
+var Excel = require('exceljs');
 
 router.use(fileman.multiparser());
-router.post("/api", function(req, res){
-    qb.select("*").get('student', function(err, result){
-      if(err){return res.json("db exception");}
-      return res.json(result);
-    });
+router.post("/excel", function(req, res){
+  var fs = require('fs');
+  var writeStream = fs.createWriteStream("file.xls",{flags:'a'});//append the write stream
+console.log(req.body);
+  var row1 = req.body.name1+"\t"+" 21"+"\t"+"Rob"+"\n";
+  writeStream.write(row1);
+
+ writeStream.close();
+  res.json("hel")
 });
+
+
+router.post("/api", function(req, res){
+  qb.select("*").get('student', function(err, result){
+    if(err){return res.json("db exception");}
+    return res.json(result);
+  });
+});
+
 
  router.post("/upload", upload.any(), function(req, res){
      console.log("upload.any()");
